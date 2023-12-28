@@ -12,8 +12,8 @@ pipeline {
         }      
           stage ('Build') {
               steps {
-                    sh 'cd $WORKSPACE/UIUX; npm install'
-                   sh 'cd $WORKSPACE/UIUX; npm run build'
+                    sh 'cd $WORKSPACE; npm install'
+                   sh 'cd $WORKSPACE; npm run build'
 
                 }
             }
