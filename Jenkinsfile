@@ -14,7 +14,7 @@ pipeline {
               steps {
                  node ('JenkinsSlave_UI') {
                     sh 'cd $WORKSPACE/UIUX; npm install --unsafe-perm'
-                   sh 'cd $WORKSPACE/UIUX; npm run build --prod'
+                   sh 'cd $WORKSPACE/UIUX; npm run build'
 
                 }
             }
