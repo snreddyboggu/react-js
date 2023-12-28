@@ -12,11 +12,10 @@ pipeline {
         }      
           stage ('Build') {
               steps {
-                 node ('JenkinsSlave_UI') {
                     sh 'cd $WORKSPACE/UIUX; npm install'
                    sh 'cd $WORKSPACE/UIUX; npm run build'
 
                 }
             }
         }
-     }
+     
