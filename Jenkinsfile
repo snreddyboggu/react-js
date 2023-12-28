@@ -3,20 +3,22 @@ pipeline {
      label 'Build-server'
      }
      stages {
-       stage ('Checkout') {
-           steps {
-             node ('Build-server') {
+        stage ('Checkout') {
+           steps  {
                checkout scm
              }
-            }
-        }      
-          stage ('Build') {
+            }     
+        stage ('Dependency-installation') {
               steps {
                     sh 'cd $WORKSPACE; npm install'
-                   sh 'cd $WORKSPACE; npm run build'
 
                 }
             }
-        }
+         stage ('Building') {
+              steps {
+                sh 'cd $WORKSPACE; npm run build'
+           }
+       } 
+       }
      
 }
