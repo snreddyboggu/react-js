@@ -1,11 +1,11 @@
 pipeline {
    agent {
-     label 'slavename-level'
+     label 'Build-server'
      }
      stages {
        stage ('Checkout') {
            steps {
-             node ('BuildNodeNmae') {
+             node ('Build-server') {
                checkout scm
              }
             }
@@ -13,7 +13,7 @@ pipeline {
           stage ('Build') {
               steps {
                  node ('JenkinsSlave_UI') {
-                    sh 'cd $WORKSPACE/UIUX; npm install --unsafe-perm'
+                    sh 'cd $WORKSPACE/UIUX; npm install'
                    sh 'cd $WORKSPACE/UIUX; npm run build'
 
                 }
