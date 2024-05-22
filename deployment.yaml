@@ -20,15 +20,4 @@ spec:
         ports:
         - containerPort: 80
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: react-js-service
-spec:
-  selector:
-    app: react-js
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: LoadBalancer
+
