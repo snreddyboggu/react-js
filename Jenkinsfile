@@ -7,8 +7,8 @@ pipeline{
     string(name: 'region', defaultValue: 'ap-south-1', description: 'eks cluster region')
   }
   environment{
-    ACCESS_KEY = 
-    SECRET_KEY = 
+    ACCESS_KEY = credentials('aws_access_key_id')
+    SECRET_KEY = credentials('aws_secret_access_key')
   }
   
   stages{
@@ -21,8 +21,8 @@ pipeline{
     stage('eks connect'){
       steps{
           sh """ 
-                aws configure set aws_access_key_id ""
-                aws configure set aws_secret_access_key ""
+                aws configure set aws_access_key_id "$ACCESS_KEY"
+                aws configure set aws_secret_access_key "$SECRET_KEY"
                 aws configure set aws_region ""
                 aws eks update-kubeconfig --region ${params.region} --name ${params.cluster}
 
@@ -46,7 +46,9 @@ pipeline{
               CurrentBuild.result= 'UNSTABLE'
             }
             if(apply){
-              sh 
+              sh """
+              kubectl apply -f 
+              """;
               
             }
          }
