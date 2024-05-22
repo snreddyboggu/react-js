@@ -6,7 +6,10 @@ pipeline{
     string(name: 'cluster', defaultValue: 'eks-dev-cluster', description: 'eks cluster name' )
     string(name: 'region', defaultValue: 'ap-south-1', description: 'eks cluster region')
   }
-  
+  environment{
+    ACCESS_KEY = 
+    SECRET_KEY = 
+  }
   
   stages{
     
@@ -17,7 +20,10 @@ pipeline{
     }
     stage('eks connect'){
       steps{
-        """ 
+          sh """ 
+                aws configure set aws_access_key_id ""
+                aws configure set aws_secret_access_key ""
+                aws configure set aws_region ""
                 aws eks update-kubeconfig --region ${params.region} --name ${params.cluster}
 
               """
