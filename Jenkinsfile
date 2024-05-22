@@ -2,9 +2,11 @@ pipeline{
   agent any
   
   stages{
+    
     stage('git checkout'){
+
       steps{
-        git branch: main
+        git 'https://github.com/snreddyboggu/react-js.git'
       }
       
     }
