@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: react-js
-        image: yourdockerhubusername/react-js:latest # Match this with the Jenkinsfile image name and tag
+        image: nginx # Match this with the Jenkinsfile image name and tag
         ports:
         - containerPort: 80
 ---
