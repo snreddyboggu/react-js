@@ -22,7 +22,7 @@ pipeline{
 
     
     stage('eks deployment'){
-        when { expression { params.action == 'create}}
+        when { expression { params.action == 'create'}}
         steps{
           
           scripts{
