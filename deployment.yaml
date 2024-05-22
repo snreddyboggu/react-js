@@ -19,21 +19,6 @@ spec:
         image: nginx # Match this with the Jenkinsfile image name and tag
         ports:
         - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-service
-  labels:
-    app: nginx
-spec:
-  selector:
-    app: nginx
-  ports:
-  - protocol: TCP
-    nodePort: 30163
-    port: 80
-    targetPort: 80
-  type: LoadBalancer
+
 
 
