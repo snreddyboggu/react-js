@@ -1,23 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-js-deployment
+  name: nginx-deployment
   labels:
-    app: react-js
+    app: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: react-js
+      app: nginx
   template:
     metadata:
       labels:
-        app: react-js
+        app: nginx
     spec:
       containers:
-      - name: react-js
+      - name: nginx
         image: nginx # Match this with the Jenkinsfile image name and tag
         ports:
         - containerPort: 80
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    nodePort: 30163
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+
 
