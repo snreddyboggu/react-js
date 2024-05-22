@@ -52,8 +52,7 @@ pipeline {
         }
       }
     }
-    
-    // Optionally, add stages for destroy actions if needed
+
     stage('eks destroy') {
       when {
         expression { params.action == 'destroy' }
@@ -76,6 +75,40 @@ pipeline {
         }
       }
     }
-    
-    // Add a stage for destroying the EKS cluster if needed
-    stage('destroy eks cluster')
+
+    stage('destroy eks cluster') {
+      when {
+        expression { params.action == 'destroyekscluster' }
+      }
+      steps {
+        script {
+          def destroyCluster = false
+          try {
+            input message: 'Please confirm to destroy the EKS cluster', ok: 'Destroy Cluster'
+            destroyCluster = true
+          } catch (error) {
+            destroyCluster = false
+            currentBuild.result = 'UNSTABLE'
+          }
+          if (destroyCluster) {
+            sh """
+              aws eks delete-cluster --region ${params.region} --name ${params.cluster}
+            """
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      cleanWs()
+    }
+    success {
+      echo 'Pipeline completed successfully!'
+    }
+    failure {
+      echo 'Pipeline failed!'
+    }
+  }
+}
