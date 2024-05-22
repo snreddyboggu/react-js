@@ -46,7 +46,7 @@ pipeline {
           }
           if (apply) {
             sh """
-              kubectl apply -f kubernetes/deployment.yaml
+              kubectl apply -f .
             """
           }
         }
